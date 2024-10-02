@@ -17,4 +17,9 @@
         state: started
         enabled: yes  # Enable the service to start at boot
 
-    # Step 3: Ensure NGINX is listening
+    # Step 3: Ensure NGINX is listening on port 80
+    - name: Ensure NGINX is listening on port 80
+      wait_for:
+        port: 80
+        state: started
+        timeout: 60
