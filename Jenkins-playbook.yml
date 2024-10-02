@@ -15,10 +15,11 @@
       url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
       dest: sudo wget -O /usr/share/keyrings/jenkins-keyring.asc
         
-  - name: Add Jenkins repository
-    apt_repository:
-      repo: deb http://pkg.jenkins.io/debian-stable binary/
-      tate: present
+  - name: Add Jenkins repo
+    ansible.builtin.apt_repository:
+      repo: deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/
+      state: present
+      filename: jenkins.list 
 
   - name: Update all packages to their latest version
     apt:
